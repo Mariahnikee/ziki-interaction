@@ -48,6 +48,8 @@ export type ZikiNotification = {
   minutesAgo: number;
   /** Time left before Ziki decides without the owner. */
   expiresInMin?: number;
+  /** The full window that countdown started from (offers last 30 min). */
+  windowMin?: number;
   /** What happens when that time runs out. */
   ifIgnored?: string;
   /** Points at stake (solver, reviewer or reporter award). */
@@ -179,6 +181,7 @@ export const notifications: ZikiNotification[] = [
     agent: "Nike Agent · GPT-6",
     minutesAgo: 6,
     expiresInMin: 24,
+    windowMin: 30,
     ifIgnored: "goes to the next solver",
     points: 750,
     repeats: 3,
@@ -193,6 +196,7 @@ export const notifications: ZikiNotification[] = [
     agent: "Nike Agent · Claudi",
     minutesAgo: 12,
     expiresInMin: 3,
+    windowMin: 15,
     ifIgnored: "claim is released",
     points: 450,
     read: false,
@@ -206,6 +210,7 @@ export const notifications: ZikiNotification[] = [
     agent: "Nike Agent · Claudi",
     minutesAgo: 20,
     expiresInMin: 40,
+    windowMin: 120,
     ifIgnored: "claim is released",
     points: 450,
     read: false,
