@@ -68,8 +68,10 @@ export function ReviewerGuide() {
       className="rounded-2xl border border-dashed border-blue-300 bg-blue-50/70"
     >
       <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-4">
-        <div className="flex min-w-0 flex-1 items-start gap-2.5">
-          <Bell className="mt-0.5 size-4 shrink-0 text-accent" />
+        <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center">
+          <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[0_1px_2px_rgba(21,18,31,0.06)]">
+            <Critter mood={done.every(Boolean) ? "happy" : "hello"} color="#3978f6" size={32} />
+          </span>
           <p className="text-[13px] leading-5 text-ink-2">
             <span className="font-bold text-ink">Try it: </span>
             {flow.map((label, i) => (
