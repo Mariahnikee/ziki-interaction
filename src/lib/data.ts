@@ -32,7 +32,6 @@ export const user = {
   firstName: "Shoyemi",
   fullName: "Shoyemi Maria",
   points: 563,
-  notifications: 50,
 };
 
 export const project = "Zedu";

@@ -63,3 +63,130 @@ body {
   background: var(--zk-bg);
   color: var(--zk-text);
 }
+
+/* Notification critters. Motion only when the person hasn't asked for less. */
+.critter * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .critter {
+    animation: critter-bob 3.2s ease-in-out infinite;
+  }
+  .critter-eyes {
+    animation: critter-blink 4.5s infinite;
+  }
+  .critter-blink-bulb {
+    animation: critter-pulse 1.2s ease-in-out infinite;
+  }
+  .critter-zzz {
+    animation: critter-zzz 2.4s ease-out infinite;
+  }
+  .critter-zzz-2 {
+    animation-delay: 1.2s;
+  }
+  .critter-tilt {
+    transform-origin: 50% 90%;
+    animation: critter-tilt 2.8s ease-in-out infinite;
+  }
+  .critter-sweat {
+    animation: critter-sweat 1.6s ease-in infinite;
+  }
+  .critter-flag {
+    transform-origin: left center;
+    animation: critter-flag 1s ease-in-out infinite alternate;
+  }
+  .critter-wave {
+    transform-origin: left bottom;
+    animation: critter-wave 0.9s ease-in-out infinite alternate;
+  }
+  .critter-sparkle {
+    animation: critter-pulse 1.6s ease-in-out infinite;
+  }
+  .group:hover .critter {
+    animation: critter-wiggle 0.5s ease-in-out;
+  }
+  .critter-cheer {
+    animation: critter-hop 0.7s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+  .burst-dot {
+    animation: burst 0.8s ease-out forwards;
+  }
+  .bell-ring {
+    transform-origin: 50% 10%;
+    animation: bell-ring 4s ease-in-out infinite;
+  }
+  .panel-pop {
+    transform-origin: top right;
+    animation: panel-pop 0.18s ease-out;
+  }
+  .row-open {
+    animation: row-open 0.2s ease-out;
+  }
+}
+
+@keyframes critter-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+@keyframes critter-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+@keyframes critter-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@keyframes critter-zzz {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(4px, -7px) scale(1.1); }
+}
+@keyframes critter-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  40%, 60% { transform: rotate(-10deg); }
+}
+@keyframes critter-sweat {
+  0% { opacity: 0; transform: translateY(-1px); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(5px); }
+}
+@keyframes critter-flag {
+  from { transform: skewY(0deg); }
+  to { transform: skewY(-8deg) scaleX(0.92); }
+}
+@keyframes critter-wave {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(18deg); }
+}
+@keyframes critter-wiggle {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: -9deg; }
+  75% { rotate: 9deg; }
+}
+@keyframes critter-hop {
+  0% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-7px) scale(1.12) rotate(-8deg); }
+  70% { transform: translateY(1px) scale(0.96) rotate(5deg); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes burst {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
+}
+@keyframes bell-ring {
+  0%, 16%, 100% { rotate: 0deg; }
+  3% { rotate: 16deg; }
+  6% { rotate: -14deg; }
+  9% { rotate: 9deg; }
+  12% { rotate: -5deg; }
+}
+@keyframes panel-pop {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes row-open {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
