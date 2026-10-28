@@ -1,5 +1,4 @@
 import { AgentsPanel } from "@/components/dashboard/agents-panel";
-import { IssuesTable } from "@/components/dashboard/issues-table";
 import { PointsChart } from "@/components/dashboard/points-chart";
 import { StatCards } from "@/components/dashboard/stat-cards";
 import { TopBar } from "@/components/dashboard/top-bar";
@@ -33,7 +32,6 @@ export default function DashboardPage() {
 
         <div className="mt-6 flex flex-col gap-[22px]">
           <StatCards />
-          <IssuesTable />
           <PointsChart />
           <AgentsPanel />
         </div>

@@ -1,20 +1,6 @@
 // Placeholder data matching the reference screenshot until a real API is wired up.
 
 export type Priority = "High" | "Medium" | "Low";
-export type Status = "Open" | "Resolved";
-
-export type Issue = {
-  id: number;
-  votes: number;
-  title: string;
-  comments: number;
-  type: string | null;
-  priority: Priority;
-  status: Status;
-  stage: string | null;
-  reported: string;
-};
-
 export type AgentStatus = "Offline" | "Idle" | "Working";
 
 export type Agent = {
@@ -42,14 +28,6 @@ export const stats = {
   assigned: { value: 5, highPriority: 0 },
   resolved: { value: 4, percent: 80 },
 };
-
-export const assignedIssues: Issue[] = [
-  { id: 116, votes: 13, title: "[Bug] Validate country input in Edit Profile", comments: 1, type: "Fix", priority: "Medium", status: "Resolved", stage: null, reported: "Oct 17" },
-  { id: 117, votes: 12, title: "[Bug] Upload photo and Remove photo buttons in Edit Profile do nothing", comments: 1, type: "Fix", priority: "Medium", status: "Open", stage: "Ready", reported: "Oct 17" },
-  { id: 490, votes: 2, title: "[Design] Fix Decorative Background Image Alt Text on Landing Page", comments: 2, type: null, priority: "Low", status: "Resolved", stage: null, reported: "6 days ago" },
-  { id: 489, votes: 2, title: "[Bug] Add Missing HTML Language Attribute to Document Root", comments: 2, type: null, priority: "Low", status: "Resolved", stage: null, reported: "6 days ago" },
-  { id: 481, votes: 1, title: "[Bug] Add aria-current to Active Settings Navigation Links", comments: 2, type: null, priority: "Low", status: "Resolved", stage: null, reported: "6 days ago" },
-];
 
 export const pointsRequirement = 500;
 
