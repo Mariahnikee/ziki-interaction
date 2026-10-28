@@ -2,14 +2,14 @@
 
 import { useEffect, useId, useState } from "react";
 import { Critter } from "./critter";
-import { ArrowUpRight, Check, ChevronDown } from "./icons";
+import { ArrowUpRight, Bell, Check, ChevronDown } from "./icons";
 import { cx } from "./ui";
 
 const REPO = "https://github.com/Mariahnikee/ziki-interaction";
 const BELL = 'button[aria-label^="Notifications,"]';
 const PANEL = '[role=dialog][aria-label="Notifications"]';
 
-const flow = ["Open the bell", "Expand a request", "Answer it", "See the agent react"];
+const flow = ["Tap the notification bell", "Expand a request", "Answer it", "Watch the agent react"];
 
 /** Which flow steps the reviewer has done, read from the page. The notification code is never touched. */
 function readFlow(): boolean[] {
@@ -52,88 +52,67 @@ export function ReviewerGuide() {
     if (bell.getAttribute("aria-expanded") !== "true") bell.click();
   };
 
-  const allDone = done.every(Boolean);
+  const opened = done[0];
+
+  // Ring the bell until the reviewer has opened it once.
+  useEffect(() => {
+    const bell = document.querySelector(BELL);
+    if (!bell) return;
+    bell.classList.toggle("review-ring", !opened);
+    return () => bell.classList.remove("review-ring");
+  }, [opened]);
 
   return (
     <section
-      aria-labelledby="guide-title"
-      className="relative overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_1px_2px_rgba(21,18,31,0.04)]"
+      aria-label="How to review this prototype"
+      className="rounded-2xl border border-dashed border-blue-300 bg-blue-50/70"
     >
-      {/* A thin accent on the left, like an unread notification. */}
-      <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-[linear-gradient(180deg,#3978f6,#8fc9ff)]" />
-
-      <div className="flex flex-col gap-4 py-4 pr-4 pl-5 sm:flex-row sm:items-center sm:gap-5 sm:pr-5">
-        <div className="flex min-w-0 flex-1 gap-3.5">
-          <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50">
-            <Critter mood={allDone ? "happy" : "hello"} color="#3978f6" size={40} />
-          </span>
-          <div className="min-w-0">
-            <p className="flex items-center gap-1.5 text-xs text-muted">
-              <span className="font-semibold text-ink-2">Zik asks</span>
-              <span aria-hidden>·</span>
-              <span>prototype guide</span>
-              {!allDone && <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />}
-            </p>
-            <h2 id="guide-title" className="mt-0.5 text-[15px] leading-5 font-semibold text-ink">
-              {allDone ? "That's it. Thanks for reviewing!" : "Review the new notification bell?"}
-            </h2>
-            <p className="mt-0.5 text-[13px] leading-[18px] text-ink-2">
-              Agents now ask you for a decision instead of telling you a story. It all happens in the bell, top right.
-            </p>
-
-            <ol aria-label="What to try" className="mt-2.5 flex flex-wrap items-center gap-x-1.5 gap-y-1.5 text-xs sm:gap-x-0">
-              {flow.map((label, i) => (
-                <li key={label} className="flex items-center">
-                  <span
-                    className={cx(
-                      "inline-flex items-center gap-1 rounded-full py-0.5 pr-2 pl-1 font-medium transition-colors",
-                      done[i] ? "bg-ok-bg text-ok-fg" : "bg-chip text-ink-2",
-                    )}
-                  >
-                    <span
-                      className={cx(
-                        "inline-flex size-4 items-center justify-center rounded-full text-[10px] font-bold",
-                        done[i] ? "bg-ok-fg text-white" : "bg-surface text-accent",
-                      )}
-                      aria-hidden
-                    >
-                      {done[i] ? <Check className="size-2.5" strokeWidth={3} /> : i + 1}
-                    </span>
-                    {label}
-                    {done[i] && <span className="sr-only"> (done)</span>}
-                  </span>
-                  {i < flow.length - 1 && (
-                    <span aria-hidden className="mx-1 hidden h-px w-4 bg-line sm:block" />
+      <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-4">
+        <div className="flex min-w-0 flex-1 items-start gap-2.5">
+          <Bell className="mt-0.5 size-4 shrink-0 text-accent" />
+          <p className="text-[13px] leading-5 text-ink-2">
+            <span className="font-bold text-ink">Try it: </span>
+            {flow.map((label, i) => (
+              <span key={label}>
+                {i > 0 && <span aria-hidden className="text-muted"> · </span>}
+                <span className={cx(done[i] && "text-ok-fg")}>
+                  {done[i] ? <Check className="mr-0.5 inline size-3 align-[-1px]" strokeWidth={3} /> : `${i + 1}. `}
+                  {i === 0 ? (
+                    <>
+                      <span className="font-bold text-ink">Tap the notification bell</span> (top right)
+                    </>
+                  ) : (
+                    label
                   )}
-                </li>
-              ))}
-            </ol>
-          </div>
+                  {done[i] && <span className="sr-only"> (done)</span>}
+                </span>
+              </span>
+            ))}
+            <button
+              type="button"
+              aria-expanded={showWhy}
+              aria-controls={whyId}
+              onClick={() => setShowWhy((v) => !v)}
+              className="ml-2 inline-flex items-center gap-0.5 font-semibold text-accent hover:underline"
+            >
+              What changed
+              <ChevronDown className={cx("size-3 transition-transform", showWhy && "rotate-180")} />
+            </button>
+          </p>
         </div>
 
-        <div className="flex shrink-0 gap-2 sm:flex-col">
-          <button
-            type="button"
-            onClick={startAtBell}
-            className="h-9 flex-1 sm:flex-none rounded-full bg-blue-500 px-4 text-[13px] font-semibold whitespace-nowrap text-white transition-[background-color,transform] hover:bg-blue-600 active:scale-[0.97]"
-          >
-            {done[0] ? "Open the bell again" : "Start at the bell"}
-          </button>
-          <button
-            type="button"
-            aria-expanded={showWhy}
-            aria-controls={whyId}
-            onClick={() => setShowWhy((v) => !v)}
-            className="inline-flex h-9 flex-1 sm:flex-none items-center justify-center gap-1 rounded-full border border-line px-4 whitespace-nowrap text-[13px] font-semibold text-ink transition-colors hover:bg-bg"
-          >
-            What changed
-            <ChevronDown className={cx("size-3.5 text-muted transition-transform", showWhy && "rotate-180")} />
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={startAtBell}
+          className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-full bg-blue-500 px-4 text-[13px] font-bold whitespace-nowrap text-white transition-[background-color,transform] hover:bg-blue-600 active:scale-[0.97]"
+        >
+          <Bell className="size-3.5" />
+          {opened ? "Open the bell again" : "Tap the notification bell"}
+        </button>
       </div>
 
       {showWhy && (
-        <div id={whyId} className="row-open border-t border-divider bg-bg/60 py-4 pr-4 pl-5 sm:pr-5">
+        <div id={whyId} className="row-open border-t border-dashed border-blue-300 px-4 py-4">
           <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
             <div className="rounded-xl border border-line bg-surface p-3">
               <p className="text-[11px] font-semibold tracking-wide text-muted uppercase">Before</p>
