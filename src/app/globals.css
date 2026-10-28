@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
+/* Design tokens mirrored from ziki.dev */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --zk-bg: #f5f7fc;
+  --zk-surface: #fff;
+  --zk-text: #15121f;
+  --zk-text2: #3e4a63;
+  --zk-muted: #5f6577;
+  --zk-border: #e3e8f2;
+  --zk-divider: #eef1f7;
+  --zk-tint: #eaf2fe;
+  --zk-chip: #f0f2f7;
+  --zk-seg: #eef1f6;
+  --zk-accent: #1f5fd9;
+  --zk-ok-bg: #e3f6ec;
+  --zk-ok-fg: #146c43;
+  --zk-warn-bg: #fdf3d7;
+  --zk-warn-fg: #7a4e00;
+  --zk-warn-bd: #f0cd72;
+  --zk-info-bg: #e7f0ff;
+  --zk-info-fg: #1d4fb8;
+  --zk-points-bg: #fdf1c9;
+  --zk-points-fg: #8a5a00;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg: var(--zk-bg);
+  --color-surface: var(--zk-surface);
+  --color-ink: var(--zk-text);
+  --color-ink-2: var(--zk-text2);
+  --color-muted: var(--zk-muted);
+  --color-line: var(--zk-border);
+  --color-divider: var(--zk-divider);
+  --color-tint: var(--zk-tint);
+  --color-chip: var(--zk-chip);
+  --color-seg: var(--zk-seg);
+  --color-accent: var(--zk-accent);
+  --color-ok-bg: var(--zk-ok-bg);
+  --color-ok-fg: var(--zk-ok-fg);
+  --color-warn-bg: var(--zk-warn-bg);
+  --color-warn-fg: var(--zk-warn-fg);
+  --color-warn-bd: var(--zk-warn-bd);
+  --color-info-bg: var(--zk-info-bg);
+  --color-info-fg: var(--zk-info-fg);
+  --color-points-bg: var(--zk-points-bg);
+  --color-points-fg: var(--zk-points-fg);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-blue-50: #edf3fe;
+  --color-blue-100: #dbe7fd;
+  --color-blue-200: #bccffb;
+  --color-blue-300: #95b5f9;
+  --color-blue-400: #679bf8;
+  --color-blue-500: #3978f6;
+  --color-blue-600: #2a63d8;
+  --color-blue-700: #2756b8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--zk-bg);
+  color: var(--zk-text);
 }
