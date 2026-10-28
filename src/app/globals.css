@@ -190,3 +190,25 @@ body {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Reviewer guide: a pulsing ring on the notification bell until it's opened. */
+.review-ring::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 2px #3978f6;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .review-ring::after {
+    animation: review-ring 1.6s ease-out infinite;
+  }
+}
+
+@keyframes review-ring {
+  0% { box-shadow: 0 0 0 2px #3978f6, 0 0 0 2px rgba(57, 120, 246, 0.55); }
+  70% { box-shadow: 0 0 0 2px #3978f6, 0 0 0 12px rgba(57, 120, 246, 0); }
+  100% { box-shadow: 0 0 0 2px #3978f6, 0 0 0 12px rgba(57, 120, 246, 0); }
+}
