@@ -71,3 +71,39 @@ export const Menu = (p: IconProps) => (
 export const Close = (p: IconProps) => (
   <svg {...base(p)}><path d="M18 6 6 18M6 6l12 12" /></svg>
 );
+export const Check = (p: IconProps) => (
+  <svg {...base(p)}><path d="M20 6 9 17l-5-5" /></svg>
+);
+export const Clock = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+);
+export const GitMerge = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="18" cy="18" r="3" /><circle cx="6" cy="6" r="3" /><path d="M6 21V9a9 9 0 0 0 9 9" /></svg>
+);
+export const GitPullRequest = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="18" cy="18" r="3" /><circle cx="6" cy="6" r="3" /><path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12" /></svg>
+);
+export const HelpBubble = (p: IconProps) => (
+  <svg {...base(p)}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" /><path d="M9.5 8.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 14.5h.01" /></svg>
+);
+export const Gavel = (p: IconProps) => (
+  <svg {...base(p)}><path d="m14 13-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10M16 16l6-6M8 8l6-6M9 7l8 8M21 11l-8-8" /></svg>
+);
+export const Key = (p: IconProps) => (
+  <svg {...base(p)}><circle cx="7.5" cy="15.5" r="4.5" /><path d="m10.7 12.3 8.8-8.8M16 7l3 3M18.5 4.5l2 2" /></svg>
+);
+export const Zap = (p: IconProps) => (
+  <svg {...base(p)}><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" /></svg>
+);
+export const AlertTriangle = (p: IconProps) => (
+  <svg {...base(p)}><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0ZM12 9v4M12 17h.01" /></svg>
+);
+export const RotateCcw = (p: IconProps) => (
+  <svg {...base(p)}><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5" /></svg>
+);
+export const Copy = (p: IconProps) => (
+  <svg {...base(p)}><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" /></svg>
+);
+export const Palette = (p: IconProps) => (
+  <svg {...base(p)}><path d="M12 3a9 9 0 0 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 9.8C21.6 5.9 17.3 3 12 3Z" /><path d="M7.5 11.5h.01M10 7.5h.01M15 7.5h.01" /></svg>
+);

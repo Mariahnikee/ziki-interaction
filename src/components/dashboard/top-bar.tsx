@@ -4,7 +4,6 @@ import { useState } from "react";
 import { project, user, agents } from "@/lib/data";
 import { Dropdown, DropdownItem } from "../dropdown";
 import {
-  Bell,
   Bot,
   ChevronDown,
   Close,
@@ -16,6 +15,7 @@ import {
   ZikiLogo,
 } from "../icons";
 import { StatusDot } from "../ui";
+import { NotificationsMenu } from "./notifications-menu";
 
 const navLinks = [
   { label: "Product", icon: InfoCircle },
@@ -118,16 +118,7 @@ export function TopBar() {
             {user.points} pts
           </span>
 
-          <button
-            type="button"
-            aria-label={`Notifications, ${user.notifications} unread`}
-            className="relative ml-1 inline-flex size-10 items-center justify-center rounded-full text-ink hover:bg-bg"
-          >
-            <Bell className="size-[18px]" />
-            <span className="absolute top-0 right-0 rounded-full bg-blue-500 px-1.5 text-[11px] leading-4 font-semibold text-white ring-2 ring-surface">
-              {user.notifications}
-            </span>
-          </button>
+          <NotificationsMenu />
 
           <button
             type="button"
