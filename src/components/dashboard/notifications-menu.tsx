@@ -133,7 +133,7 @@ function timeAgo(minutes: number) {
   return `${Math.floor(minutes / 1440)}d`;
 }
 
-type Handled = { label: string };
+type Handled = { label: string; wasRead: boolean };
 type Tab = "needs" | "updates";
 
 export function NotificationsMenu() {
@@ -187,15 +187,20 @@ export function NotificationsMenu() {
   const resolve = (n: ZikiNotification, action: NotificationAction) => {
     markRead(n.id);
     if (action.href) return;
-    setHandled((h) => ({ ...h, [n.id]: { label: action.done } }));
+    setHandled((h) => ({ ...h, [n.id]: { label: action.done, wasRead: n.read } }));
   };
 
-  const undo = (id: string) =>
+  const undo = (id: string) => {
+    const previous = handled[id];
+    setItems((list) =>
+      list.map((n) => (n.id === id ? { ...n, read: previous?.wasRead ?? n.read } : n)),
+    );
     setHandled((h) => {
       const next = { ...h };
       delete next[id];
       return next;
     });
+  };
 
   const openMenu = () => {
     setSettled(new Set(Object.keys(handled)));
@@ -234,7 +239,7 @@ export function NotificationsMenu() {
       >
         <Bell className={cx("size-[18px]", urgentOpen > 0 && !open && "bell-ring")} />
         {unread > 0 && (
-          <span className="absolute top-0 right-0 rounded-full bg-blue-500 px-1.5 text-[11px] leading-4 font-semibold text-white ring-2 ring-surface">
+          <span aria-hidden="true" className="absolute top-0 right-0 rounded-full bg-blue-500 px-1.5 text-[11px] leading-4 font-semibold text-white ring-2 ring-surface">
             {unread}
           </span>
         )}
@@ -255,6 +260,9 @@ export function NotificationsMenu() {
                   {waiting.length === 0
                     ? "All quiet. Your crew is heads-down working."
                     : `Your crew is waiting on ${waiting.length} ${waiting.length === 1 ? "answer" : "answers"}.`}
+                </p>
+                <p className="mt-0.5 text-[11px] leading-4 text-muted">
+                  Demo preview · actions do not reach live agents.
                 </p>
               </div>
               <button
