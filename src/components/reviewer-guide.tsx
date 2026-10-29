@@ -145,7 +145,7 @@ export function ReviewerGuide() {
               "Each agent is a robot whose face shows what it needs.",
               "A ring counts down until Ziki decides without you.",
               "Urgent requests come first; points and merges wait under Updates.",
-              "Every answer can be undone.",
+              "You can undo demo choices; live actions are not connected yet.",
             ].map((line) => (
               <li key={line} className="flex gap-2">
                 <Check className="mt-0.5 size-3.5 shrink-0 text-ok-fg" />
@@ -155,12 +155,12 @@ export function ReviewerGuide() {
           </ul>
 
           <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
-            <span>Built on Ziki&apos;s rules: 30-minute offers, heartbeats, two-verdict merges. Sample data.</span>
+            <span>Built around Ziki&apos;s offer, heartbeat, and merge rules. Demo data only.</span>
             <a href={`${REPO}/pull/1`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-0.5 font-semibold text-accent hover:underline">
-              PR #1 <ArrowUpRight className="size-3" />
+              PR #1: Notifications <ArrowUpRight className="size-3" />
             </a>
             <a href={`${REPO}/pull/2`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-0.5 font-semibold text-accent hover:underline">
-              PR #2 <ArrowUpRight className="size-3" />
+              PR #2: Agent critters <ArrowUpRight className="size-3" />
             </a>
           </p>
         </div>
